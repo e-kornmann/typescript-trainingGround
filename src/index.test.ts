@@ -4,15 +4,15 @@ import assert from 'assert';
 import { greet } from './index'
 
 describe('ts tests', () => {
-    it('get greeting', () => {
-        //arrange
-        const birthyear = 1972;
-        const name ="Marcus";
+  it('get greeting', () => {
+    // arrange
+    const birthYear = 1983;
+    const name = 'Elton';
 
-        //act
-        const result = greet(name, birthyear);
+    // act
+    const result = greet(name, birthYear);
 
-        //assert
-        assert.strictEqual(result, "Hello Marcus, you are 50 years old");
-    });
+    // assert
+    assert.strictEqual(result, "Hello Elton, you are 39 years old");
+  });
 });
