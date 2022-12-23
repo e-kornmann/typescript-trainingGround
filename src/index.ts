@@ -91,6 +91,8 @@ const greetPeopleNew = (greeting:string, ...names:string[]) => {
   return `${greeting} ${formatter.format(names)}`;
 };
 
+const addToStart = <T>(list:T[], itemToAdd: T) : T[] => [itemToAdd, ...list];
+
 export {
   greet,
   isOld as isOldPerson,
@@ -98,6 +100,7 @@ export {
   countm,
   getEvensum,
   sumEven,
+  Address,
   Person,
   getPersonStreetNo,
   getPersonStreet,
@@ -108,4 +111,5 @@ export {
   greetPeople,
   greetPeopleEl,
   greetPeopleNew,
+  addToStart,
 };

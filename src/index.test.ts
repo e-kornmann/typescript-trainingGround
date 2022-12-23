@@ -8,6 +8,7 @@ import {
   countm,
   getEvensum,
   sumEven,
+  Address,
   Person,
   getPersonStreetNo,
   getPersonStreet,
@@ -18,6 +19,7 @@ import {
   greetPeople,
   greetPeopleEl,
   greetPeopleNew,
+  addToStart,
 } from './index';
 
 import {
@@ -27,6 +29,10 @@ import {
 import {
   EmployeeClass,
 } from './EmployeeClass';
+
+import {
+  Wrapper,
+} from './Wrapper';
 
 describe('ts tests', () => {
   it('get greeting', () => {
@@ -131,7 +137,9 @@ describe('ts tests', () => {
   it('prints an IPerson', () => {
     // arrange
     const p1 : IPerson = { name: 'Marcus', birthYear: 1972 };
-    const p2 = { name: 'David', birthYear: 1975, drummer: true }; // so don't put drummer there because it does not follow the contract of the interface
+    const p2 = { name: 'David', birthYear: 1975, drummer: true };
+    // so don't put drummer there because it does not follow the contract of the interface
+    // but because name and birthyear are in the contract it still passes
 
     // act
     const p1Address = getPersonNameString(p1);
@@ -174,5 +182,58 @@ describe('ts tests', () => {
     assert.strictEqual(greeting4, 'Hello Marcus and Dasha and David');
     assert.strictEqual(greeting4El, 'Hello Marcus, Dasha and David');
     assert.strictEqual(greeting5New, 'Hello Marcus, Dasha, David, Julia, Wietse and Lucas');
+  });
+
+  it('add to list', () => {
+    // arrange
+    const listOfPeople : IPerson[] = [
+      { name: 'Marcus', birthYear: 1972 },
+    ];
+    const listOfAddresses : Address[] = [
+      { street: 'Strålgatan', streetNo: 23, city: 'Stockholm' },
+      { street: 'SchraeschazschStrasse', streetNo: 2, city: 'Amsterdam' },
+    ];
+
+    // act
+    const numberOfPeople = addToStart<IPerson>(listOfPeople, { name: 'David', birthYear: 1975 });
+    const numberOfAddresses = addToStart<Address>(listOfAddresses, { street: 'Champs Elysee', streetNo: 1, city: 'Paris' });
+
+    // assert
+    assert.strictEqual(numberOfPeople[0].name, 'David');
+    assert.strictEqual(numberOfAddresses[0].city, 'Paris');
+    assert.strictEqual(numberOfPeople[1].name, 'Marcus');
+    assert.strictEqual(numberOfAddresses[2].city, 'Amsterdam');
+  });
+  it('wrapper for addresses', () => {
+    // arrange
+    const listOfAddresses : Address[] = [
+      { street: 'Strålgatan', streetNo: 23, city: 'Stockholm' },
+      { street: 'SchraeschazschStrasse', streetNo: 2, city: 'Amsterdam' },
+      { street: 'Champs Elysee', streetNo: 1, city: 'Paris' },
+    ];
+
+    // act
+    const addresslist = new Wrapper<Address>(listOfAddresses);
+
+    // assert
+    assert.strictEqual(addresslist.getFirst().city, 'Stockholm');
+    assert.strictEqual(addresslist.getLast().city, 'Paris');
+  });
+  it('wrapper for IPerson', () => {
+    // arrange
+    const listOfPersons : IPerson[] = [
+      { name: 'Elton', birthYear: 1983 },
+      { name: 'Mandy', birthYear: 1983 },
+      { name: 'Reza', birthYear: 2017 },
+      { name: 'Sen', birthYear: 2012 },
+    ];
+
+    // act
+    const personlist = new Wrapper<IPerson>(listOfPersons);
+
+    // assert
+    assert.strictEqual(personlist.getFirst().birthYear, 1983);
+    assert.strictEqual(personlist.getLast().name, 'Sen');
+    assert.strictEqual(personlist.getList().name, 'Reza');
   });
 });
