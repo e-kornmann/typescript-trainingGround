@@ -10,3 +10,4 @@ class Wrapper {
     getList() { return this.list[this.list.length - 2]; }
 }
 exports.Wrapper = Wrapper;
+//# sourceMappingURL=Wrapper.js.map

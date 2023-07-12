@@ -213,3 +213,4 @@ describe('ts tests', () => {
         assert.strictEqual(personlist.getList().name, 'Reza');
     });
 });
+//# sourceMappingURL=index.test.js.map

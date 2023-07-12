@@ -79,3 +79,4 @@ const greetPeopleNew = (greeting, ...names) => {
 exports.greetPeopleNew = greetPeopleNew;
 const addToStart = (list, itemToAdd) => [itemToAdd, ...list];
 exports.addToStart = addToStart;
+//# sourceMappingURL=index.js.map

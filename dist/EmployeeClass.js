@@ -9,3 +9,4 @@ class EmployeeClass extends PersonClass_1.PersonClass {
     }
 }
 exports.EmployeeClass = EmployeeClass;
+//# sourceMappingURL=EmployeeClass.js.map
